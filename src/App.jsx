@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // 1. On crée un state pour stocker le texte de la tâche en cours
+  const [task, setTask] = useState("");
+
+  // 2. Un state pour stocker toutes les tâches ajoutées
+  const [tasks, setTasks] = useState([]);
+
+  // 3. Fonction pour ajouter une tâche
+  const addTask = () => {
+    if (task.trim() === "") return; // Empêche d'ajouter une tâche vide
+
+    setTasks([...tasks, task]); // On ajoute la tâche au tableau
+    setTask(""); // On vide l'input après ajout
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ padding: "20px" }}>
+      <h1>Ma To-Do List</h1>
+
+      {/* Input + bouton */}
+      <input
+        type="text"
+        placeholder="Écris une tâche..."
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+
+      <button onClick={addTask}>Ajouter</button>
+
+      {/* Liste des tâches */}
+      <ul>
+        {tasks.map((t, index) => (
+          <li key={index}>{t}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-export default App
+export default App;
