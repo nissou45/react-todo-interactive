@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e1b7b7;
+  font-family: system-ui, sans-serif;
+}
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  padding: 40px;
+  background: #d29696;
+  border-radius: 30px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+.title {
+  font-size: 2rem;
+  color: #1f2937;
+  border: solid 1px #9a5d5d;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+.task-input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.task-input-row input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.task-input-row select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 0.95rem;
+}
+
+.task-input-row button {
+  padding: 12px 18px;
+  background: #a56b6b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.task-input-row button:hover {
+  background: #6b3b3b;
+}
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filters button {
+  padding: 8px 18px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: 0.2s;
+}
+
+.filters button.active {
+  background: #b98a8a;
+  color: white;
+}
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #fafafa;
+  margin-bottom: 12px;
+  transition: 0.2s;
+  border: 1px solid #eee;
+}
+
+.task-item:hover {
+  background: #f0f0f0;
+}
+
+.task-item.done .task-title {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-title {
+  flex: 1;
+  margin-left: 10px;
+  font-size: 1rem;
+}
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.badge.low {
+  background: #e0f7e9;
+  color: #1d7a3f;
+}
+
+.badge.medium {
+  background: #fff3c4;
+  color: #b08900;
+}
+
+.badge.high {
+  background: #ffe0e0;
+  color: #c62828;
+}
+.delete-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  color: #c62828;
+}

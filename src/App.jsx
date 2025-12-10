@@ -1,40 +1,56 @@
 import { useState } from "react";
+import "./App.css";
+
+import TaskInput from "./components/TaskInput.jsx";
+import TaskFilters from "./components/TaskFilters.jsx";
+import TaskList from "./components/TaskList.jsx";
 
 function App() {
-  // 1. On crée un state pour stocker le texte de la tâche en cours
-  const [task, setTask] = useState("");
-
-  // 2. Un state pour stocker toutes les tâches ajoutées
   const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("all"); // all | todo | done
 
-  // 3. Fonction pour ajouter une tâche
-  const addTask = () => {
-    if (task.trim() === "") return; // Empêche d'ajouter une tâche vide
+  // Ajouter une tâche
+  const addTask = (title, priority) => {
+    const newTask = {
+      id: crypto.randomUUID(),
+      title,
+      priority,
+      done: false,
+    };
 
-    setTasks([...tasks, task]); // On ajoute la tâche au tableau
-    setTask(""); // On vide l'input après ajout
+    setTasks([...tasks, newTask]);
   };
 
+  // Marquer une tâche comme faite / non faite
+  const toggleDone = (id) => {
+    setTasks(tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+  };
+
+  // Supprimer une tâche
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((t) => t.id !== id));
+  };
+
+  // Filtrer les tâches selon l'état
+  const filteredTasks = tasks.filter((t) => {
+    if (filter === "todo") return !t.done;
+    if (filter === "done") return t.done;
+    return true; // "all"
+  });
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Ma To-Do List</h1>
+    <div className="app-container">
+      <h1 className="title">Gestionnaire de tâches</h1>
 
-      {/* Input + bouton */}
-      <input
-        type="text"
-        placeholder="Écris une tâche..."
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
+      <TaskInput addTask={addTask} />
+
+      <TaskFilters filter={filter} setFilter={setFilter} />
+
+      <TaskList
+        tasks={filteredTasks}
+        toggleDone={toggleDone}
+        deleteTask={deleteTask}
       />
-
-      <button onClick={addTask}>Ajouter</button>
-
-      {/* Liste des tâches */}
-      <ul>
-        {tasks.map((t, index) => (
-          <li key={index}>{t}</li>
-        ))}
-      </ul>
     </div>
   );
 }
